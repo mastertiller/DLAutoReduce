@@ -122,13 +122,15 @@ class AutoReduce():
                     print("base loss: " + str(base_loss))
                     print("base acc: " + str(base_acc))
                     break
-                else:
+                elif i == len(linear_layers) - 2:
                     print("############### Training End ###############")
                     stop = True
                     break
+                    
+                self.increase(linear_layers[i], linear_layers[i + 1], self.unit, self.net)
             
         print("linear layer changes for each step: ")
         print(linear_layer_change)
 
         print("mec changes for each step: ")
-        print(mec_change)
+        print(mec_change)   
