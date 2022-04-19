@@ -118,6 +118,7 @@ class AutoReduce():
                     print("############### New Round ###############")
                     linear_layer_change.append(self.print_linear(linear_layers))
                     mec_change.append(self.get_mec(linear_layers))
+                    self.initialize_weights(self.net)
                     base_acc, base_loss = self.train_get_loss_acc(self.net)
                     print("base loss: " + str(base_loss))
                     print("base acc: " + str(base_acc))
@@ -133,4 +134,4 @@ class AutoReduce():
         print(linear_layer_change)
 
         print("mec changes for each step: ")
-        print(mec_change)   
+        print(mec_change)  
