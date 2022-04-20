@@ -5,10 +5,28 @@ We proposed a grid search algorithm. **We will remove the neuron if the training
 # How to use
 
 1. First, users should define their own neural network with Pytorch (We use AlexNet as the example):
+```python
+net = alexnet(num_classes=3, fc_parameter=3000)
+net = net.to(device)
+```
 
 2. Users also need to define the 'train_get_loss_acc' function; this function will train their model and return the training loss or accuracy. Users can define the hyper-parameters by themselves, such as epoch, batch size, etc.
+```python
+def train_get_loss_acc(net):
+    train_model(net, train_loader, 10)
+    acc, loss = eval_network(net, train_loader)
+    return acc, loss
+```
+
 
 3. Then, users can import and call our open-source tool with the parameters as shown below. After calling the functions, the reducing process will begin. 
+```python
+from AutoReduce import AutoReduce
+
+reducer = AutoReduce(train_get_loss_acc, net, device, 100, 0.05, 0.003)
+reducer.reduce()
+```
+
 
 # Work flow
 
