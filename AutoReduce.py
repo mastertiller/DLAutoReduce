@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 class AutoReduce():
-    def __init__(self, train_get_loss_acc, net, device=None, unit: int = 100, loss_threshold: float = 0.05, acc_threshold: float = 0.02) -> None:
+    def __init__(self, train_get_loss_acc, net, mode, device=None, unit: int = 100, loss_threshold: float = 0.05, acc_threshold: float = 0.02) -> None:
         self.unit = unit
         self.loss_threshold = loss_threshold
         self.acc_threshold = acc_threshold
@@ -108,7 +108,18 @@ class AutoReduce():
                 self.decrease(linear_layers[i], linear_layers[i + 1], self.unit, self.net)
                 
                 new_acc, new_loss = self.train_get_loss_acc(self.net)
-                if new_acc > base_acc * (1 - self.acc_threshold) or new_loss < base_loss * (1 + self.loss_threshold):
+
+                within_acc_thres = new_acc > base_acc * (1 - self.acc_threshold)
+                within_loss_thres = new_loss < base_loss * (1 + self.loss_threshold)
+
+                if self.mode == 'acc':
+                    within_thred = within_acc_thres
+                elif self.mode == 'loss':
+                    within_thred = within_loss_thres
+                else:
+                    within_thred = within_acc_thres or within_loss_thres
+
+                if within_thred:
                     layer_size = linear_layers[i].out_features
                     for j in range(i + 1, len(linear_layers) - 1):
                         if linear_layers[j].out_features > layer_size:
