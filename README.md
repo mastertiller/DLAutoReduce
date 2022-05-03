@@ -49,4 +49,36 @@ We updated and added a button on the front end of TF-Meter ([Updated TF-Meter Gi
 
 ## Experiment result
 
-Todo
+![](images/exp1.png)
+
+* Dataset: MNIST
+* Model: MLP
+* Layer size: 2000 neurons
+* Num of layers: 3
+* Step Length: reduce 100 neurons
+* Accuracy Threshold: 0.009
+* Loss Threshold: 0.02
+* Accuracy: 99.8%
+* Model MEC change:  55.00%
+
+![](images/exp2.png)
+
+* Dataset: Fashion-MNIST
+* Model: MLP
+* Layer size: 3000 neurons
+* Num of layers: 4
+* Step Length: reduce 100 neurons
+* Accuracy Threshold: 0.01
+* Loss Threshold: 0.05
+* Accuracy: 86.5%
+* Model MEC change: 40.05%
+
+
+![](images/exp3.png)
+
+* Dataset: Fashion-MNIST
+* Linear Layer size: 2000 neurons
+* Num of layers: 3
+* Step Length: reduce 100 neurons
+* Accuracy: 0.87
+* Model MEC change: 0.75
