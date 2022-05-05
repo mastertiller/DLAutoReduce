@@ -3,7 +3,7 @@ import os
 import torch
 import torch.nn as nn
 
-class AutoReduce():
+class Beareduction():
     def __init__(self, train_get_loss_acc, net, mode, device=None, unit: int = 100, loss_threshold: float = 0.05, acc_threshold: float = 0.02) -> None:
         self.unit = unit
         self.loss_threshold = loss_threshold
